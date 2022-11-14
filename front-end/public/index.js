@@ -83,7 +83,7 @@ $('#search').on('click',function(e){
     e.preventDefault();
     $main.hide()
     clear();
-fetch(`http://localhost:4321/brand/cars/${$('#input').val()}`)
+fetch(`http://localhost:4321/brand/cars/${$('#input').val().toLowerCase()}`)
 .then(res => res.json())
 .then(data=> {
     console.log(data)

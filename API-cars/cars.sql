@@ -36,4 +36,3 @@ INSERT INTO cars (name,model,type,color,year,price,img,brand_id) VALUES ('Subaru
 INSERT INTO cars (name,model,type,color,year,price,img,brand_id) VALUES ('Nissan','GT-R','Sport','White',2021,'$114.325','https://www.edmunds.com/assets/m/for-sale/31-jn1ar5ef1lm100385/img-1-600x400.jpg',16);
 
 
-INSERT INTO contact(phone,email,address) VALUES ('888-888-8888','abcxyz@gmail.com','1111 Seattle,WA,98178')

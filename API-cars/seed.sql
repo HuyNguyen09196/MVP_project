@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS brand CASCADE;
 DROP TABLE IF EXISTS cars ;
 DROP TABLE IF EXISTS build ;
-DROP TABLE IF EXISTS contact;
+
 CREATE TABLE brand (
     id SERIAL ,
     PRIMARY KEY(id),
@@ -36,8 +36,3 @@ CREATE TABLE build (
     REFERENCES brand(id)ON DELETE CASCADE
 
 );
-CREATE TABLE contact (
-    phone text,
-    email text,
-    address text
-)

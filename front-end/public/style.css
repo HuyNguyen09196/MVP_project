@@ -1,0 +1,31 @@
+
+.bto{
+    margin-left: 45%;
+}
+.card{
+    float: left;
+    margin-left: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.card:hover{
+    transform: scale(1.1);
+    transition: 1s;
+  }
+.cardcar{
+    float: left;
+    margin-left: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.cardcar:hover{
+    transform: scale(1.1);
+    transition: 1s;
+  }
+#order{
+    margin-left: 40%;
+    margin-top: 20%;
+}
+.contact{
+    margin-left: 500px;
+}

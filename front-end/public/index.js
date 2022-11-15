@@ -7,8 +7,12 @@ $body.append($main);
 $body.append($maincar)
 var $result=$("#main");
 var $resultcar=$("#maincar");
+const ENV = "production";
+//const ENV = "dev";
 
-fetch(`http://localhost:4321/`,)
+let ApiUrl = ENV == "dev" ? "http://localhost:4321" : "https://api-cars-ngbi.onrender.com";
+
+fetch(ApiUrl)
 .then(res => res.json())
 .then(data => {
     for (var i=0;i<data.length;i++){
@@ -35,7 +39,7 @@ function brand(data){
     $a.on('click',function(){
         $main.hide();
     //    $('#carouselExampleIndicators').hide()
-            fetch(`http://localhost:4321/brand/${data.id}`,)
+            fetch(`${ApiUrl}/${data.id}`,)
     .then(res => res.json())
     .then(data => {
         console.log(data)
@@ -83,7 +87,7 @@ $('#search').on('click',function(e){
     e.preventDefault();
     $main.hide()
     clear();
-fetch(`http://localhost:4321/brand/cars/${$('#input').val().toLowerCase()}`)
+fetch(`${ApiUrl}/${$('#input').val().toLowerCase()}`)
 .then(res => res.json())
 .then(data=> {
     console.log(data)
@@ -119,10 +123,10 @@ fetch(`http://localhost:4321/brand/cars/${$('#input').val().toLowerCase()}`)
         $div2.append($p3);
         $div2.append($p4);
         $div2.append($a);
-        $('#bt').on('click',function(){
-            fetch(`http://localhost:4321/contact`)
-            .then(res => res.json())
-            .then(data=> {
+        $a.on('click',function(e){
+            e.preventDefault();
+            $main.hide()
+            clear();
             $('.contact').empty();
             let $div=$("<div class='contact' ></div>");
             let $h=("<h1 id='text' class='title'>CONTACT:</h1>");
@@ -131,7 +135,6 @@ fetch(`http://localhost:4321/brand/cars/${$('#input').val().toLowerCase()}`)
             let $h3=("<h4 id='text' class='title'>Address: 1111 Seattle,WA, 66666</h4>");
             $body.append($div);
             $div.append($h,$h1,$h2,$h3);
-        })
     })
      }
     })
@@ -142,7 +145,8 @@ $('#explore').on('click',function(e){
     e.preventDefault();
     $main.hide()
     clear();
-fetch(`http://localhost:4321/cars`)
+    $('.contact').empty();
+fetch(`${ApiUrl}/cars`)
 .then(res => res.json())
 .then(data=> {
     console.log(data)
@@ -160,7 +164,7 @@ fetch(`http://localhost:4321/cars`)
         var $p2=$("<p id='text' class='card-text'></p>");
         var $p3=$("<p id='text' class='card-text'></p>");
         var $p4=$("<p id='text' class='card-text'></p>");
-        var $a=$("<a id='bt' class='btn btn-primary'>Buy now!</a>");
+        var $a=$("<a id='btct' class='btn btn-primary'>Buy now!</a>");
         $h.text(data.name);
         $p.text('Price: ' + data.price);
         $p1.text('Model: '+ data.model);
@@ -178,9 +182,22 @@ fetch(`http://localhost:4321/cars`)
         $div2.append($p3);
         $div2.append($p4);
         $div2.append($a); 
+        $a.on('click',function(e){
+            e.preventDefault();
+            $main.hide()
+            clear();
+            $('.contact').empty();
+            let $div=$("<div class='contact' ></div>");
+            let $h=("<h1 id='text' class='title'>CONTACT:</h1>");
+            let $h1=("<h4 id='text' class='title'>Phone number : 888-888-8888</h4>");
+            let $h2=("<h4 id='text' class='title'>email : abcdefy@Gmail.com</h4>");
+            let $h3=("<h4 id='text' class='title'>Address: 1111 Seattle,WA, 66666</h4>");
+            $body.append($div);
+            $div.append($h,$h1,$h2,$h3);
+    })
         
      }
-     
+        
      
     })
 
@@ -189,6 +206,7 @@ function clear(){
     $maincar.empty();
 }
 $('#build').on('click',function(e){
+    $('.contact').hide()
     $('#carouselExampleSlidesOnly').hide();
     e.preventDefault();
     $main.hide()
@@ -203,7 +221,8 @@ $('#build').on('click',function(e){
     $body.append($div)
     $div.append($input,$input1,$input2,$input3,$input4,$a)
     $('#submit').on('click',function(){
-    fetch("http://localhost:4321/build", {
+        console.log($input.val())
+    fetch(`${ApiUrl}/build`, {
     // Adding method type
     method: "POST",
     // Adding body or contents to send
@@ -247,7 +266,7 @@ $('#coming').on('click',function(e){
     $('.contact').empty();
     $('#order').hide()
     $('.ty').hide()
-    fetch(`http://localhost:4321/coming`)
+    fetch(`${ApiUrl}/coming`)
 .then(res => res.json())
 .then(data=> {
     console.log(data)
@@ -265,7 +284,8 @@ $('#coming').on('click',function(e){
         var $p3=$("<p id='text' class='card-text'></p>");
         var $p4=$("<p id='text' class='card-text'></p>");
         var $a=$("<a id='111' class='btn btn-primary'>Contact For Price!</a>");
-        $h.text(data.name);
+        var $a1=$("<a id='buy' class='btn btn-primary'>Buy Now!</a>");
+        $h.text(data.brand);
         $p1.text('Model: '+ data.model);
         $p2.text('Type: ' + data.type);
         $p3.text('Year: ' + data.year);
@@ -279,8 +299,12 @@ $('#coming').on('click',function(e){
         $div2.append($p2);
         $div2.append($p3);
         $div2.append($p4);
-        $div2.append($a);
-        $('#111').on('click',function(){
+        $div2.append($a,$a1);
+        $a.on('click',function(e){
+            e.preventDefault();
+            $main.hide()
+            clear();
+            $('.contact').empty();
             let $div=$("<div class='contact' ></div>");
             let $h=("<h1 id='text' class='title'>CONTACT:</h1>");
             let $h1=("<h4 id='text' class='title'>Phone number : 888-888-8888</h4>");
@@ -288,9 +312,29 @@ $('#coming').on('click',function(e){
             let $h3=("<h4 id='text' class='title'>Address: 1111 Seattle,WA, 66666</h4>");
             $body.append($div);
             $div.append($h,$h1,$h2,$h3);
+    })
+    $a1.on('click',function(){
+        fetch(`${ApiUrl}/delete/${data.brand}`,{
+         method: 'DELETE',
         })
         
-     }
+        .then(res => res.text())
+        .then(data => {
+            $('.card').hide();
+            $('#order').hide();
+            var $div=$("<div class='ty' ></div>")
+            $body.append($div)
+            var $img=$("<img class='card-img-top' height='1100px'></img>");
+            $img.attr('src','https://s3.amazonaws.com/cdn.collisionservices.com/images/prods/popup/1202136C1047.jpg')
+            $div.append($img)
+        
+            
+            
+        
+        });
+            
+         })
+}
      
      
     })

@@ -74,8 +74,8 @@ app.post('/build',(req,res)=>{
     })
     .catch(e=>console.error(e.stack))
 })
-app.delete('/delete/:name',(req,res)=>{
-    pool.query(`DELETE FROM build WHERE brand='${req.params.name}'`)
+app.delete('/delete/:id',(req,res)=>{
+    pool.query(`DELETE FROM build WHERE id=${req.params.id}`)
     .then(result=>{
         res.status(204).send('Delete')
     })

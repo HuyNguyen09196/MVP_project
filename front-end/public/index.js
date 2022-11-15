@@ -314,7 +314,7 @@ $('#coming').on('click',function(e){
             $div.append($h,$h1,$h2,$h3);
     })
     $a1.on('click',function(){
-        fetch(`${ApiUrl}/delete/${data.brand}`,{
+        fetch(`${ApiUrl}/delete/${data.id}`,{
          method: 'DELETE',
         })
         

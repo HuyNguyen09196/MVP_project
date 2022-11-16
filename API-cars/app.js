@@ -29,7 +29,7 @@ app.get('/brand/:id',(req,res)=>{
     })
     .catch(e=> console.error(e.stack))
 });
-app.get('/brand/cars/:name',(req,res)=>{
+app.get('/cars/:name',(req,res)=>{
     pool.query(`SELECT * FROM cars WHERE name='${req.params.name}'`)
     .then(result=>{
         res.status(302).send(result.rows)
@@ -78,6 +78,19 @@ app.delete('/delete/:id',(req,res)=>{
     pool.query(`DELETE FROM build WHERE id=${req.params.id}`)
     .then(result=>{
         res.status(204).send('Delete')
+    })
+    .catch(e=> console.error(e.stack))
+})
+app.patch('/update/:id',(req,res)=>{
+    let update=req.body;
+    let brand=update.brand;
+    let model=update.model;
+    let type=update.type;
+    let color=update.color;
+    let year=update.year;
+    pool.query(`UPDATE build SET brand='${brand}',model='${model}',type='${type}',color='${color}',year=${year} WHERE id=${req.params.id}`)
+    .then(result=>{
+        res.status(200).send(result.rows)
     })
     .catch(e=> console.error(e.stack))
 })

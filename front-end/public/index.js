@@ -345,6 +345,7 @@ $('#coming').on('click',function(e){
             
          })
          $a2.on('click',function(){
+            $('#update').hide();
             $div=$("<div id='update' class='card' style='width: 25rem;'></div>")
             $input=$('<input class="form-control" type="text" placeholder="Brand" aria-label="default input example">')
             $input1=$('<input class="form-control" type="text" placeholder="Model" aria-label="default input example">')
